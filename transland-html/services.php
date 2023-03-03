@@ -1,5 +1,31 @@
 <?php
 include_once "header.php";
+
+$img = array();
+$route_ = array();
+$stops = array();
+include_once('dbset.php');
+
+$sql = "SELECT * FROM services";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+      
+      array_push($img,$row["img"]);
+      array_push($route_,$row["route_"]);
+      array_push($stops,$row["stops"]);
+      
+      
+      
+    }
+  } else {
+    echo "0 results";
+  }
+  
+  $conn->close();
+
 ?>
 
     <div class="page-banner-wrap text-center bg-cover" style="background-image: url('assets/img/services/services.jpeg')">
@@ -25,86 +51,39 @@ include_once "header.php";
             <div class="col-12 col-lg-12 mb-40">
                 <div class="block-contents text-center">
                     <div class="section-title">
-                        <h5>freight</h5>
+                        <h5>Services</h5>
                         <span>Our Services</span>
-                        <h2>Transland <span>Services</span></h2>
+                        <h2>Farmzen <span>Services</span></h2>
                     </div>
                 </div>
             </div>
 
             <div class="row text-center">
+            <?php
+             
+             for($i = 0;$i<count($img);$i++)
+                { 
+                    ?> 
                 <div class="col-xl-4 col-md-6 col-12">
                     <div class="single-our-service">
-                        <div class="thumb bg-cover" style="background-image: url('assets/img/services/mango.jpeg')"></div>
+                        <div class="thumb bg-cover" style="background-image: url('<?php echo  "$img[$i]"; ?>')"></div>
                         <div class="content">
                             <div class="icon">
                                
                             </div>
-                            <h3><a href="services-details.php">Ratnagiri-Mumbai</a></h3>
-                            <p>Khandala-Lonavala-Pimpri Chinchwad-Satara-Ganpatipule-Jaigad Fort-Thibaw Palace-Ratnadurg Fort</p>
+                            <h3><a href="services-details.php?cid=<?php echo $i+1;?>"><?php echo  "$route_[$i]"; ?></a></h3>
+                            <p><?php echo  "$stops[$i]"; ?></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-md-6 col-12">
-                    <div class="single-our-service">
-                        <div class="thumb bg-cover" style="background-image: url('assets/img/services/pune.jpg')"></div>
-                        <div class="content">
-                            <div class="icon">
-                                
-                            </div>
-                            <h3><a href="services-details.php">Pune-Mumbai</a></h3>
-                            <p>Lonavala-Khopoli-Karjat-Shelu-Vangni-Badlapur-Ambernath-Dombivli-Thane-Kurla-Dadar-CST</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 col-12">
-                    <div class="single-our-service">
-                        <div class="thumb bg-cover" style="background-image: url('assets/img/services/karnataka.jpg')"></div>
-                        <div class="content">
-                            <div class="icon">
-                               
-                            </div>
-                            <h3><a href="services-details.php">Karnataka-Haryana</a></h3>
-                            <p> Jaipur-Ajmer-Bhilwara-Chittorgarh-Ratlam-Dhule-solapur-Vijayapura</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 col-12">
-                    <div class="single-our-service">
-                        <div class="thumb bg-cover" style="background-image: url('assets/img/services/maharashta.jpg')"></div>
-                        <div class="content">
-                            <div class="icon">
-                              
-                            </div>
-                            <h3><a href="services-details.php">Uttrakhand-Maharashtra</a></h3>
-                            <p>Roorkee-Amritsar-Beas-Ahmedabad-Delhi-Ratlam-Andheri-Borivali-Virar-Dombivli</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 col-12">
-                    <div class="single-our-service">
-                        <div class="thumb bg-cover" style="background-image: url('assets/img/services/punjab.jpg')"></div>
-                        <div class="content">
-                            <div class="icon">
-                               
-                            </div>
-                            <h3><a href="services-details.php">Punjab-Mumbai</a></h3>
-                            <p>Ludhiana-kishangarh-udaipur-Vadodara-Bharuch</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 col-12">
-                    <div class="single-our-service">
-                        <div class="thumb bg-cover" style="background-image: url('assets/img/services/kashmir.jpg')"></div>
-                        <div class="content">
-                            <div class="icon">
-                            
-                            </div>
-                            <h3><a href="services-details.php">Kashmir-Mumbai</a></h3>
-                            <p>Himachal pradesh-Uttrakhand-Haryana-Jaipur-Rajasthan-Udaipur-Ahmedabad-Surat-Navsari-Vapi-Mumbai</p>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
+                
+                
+                
+                
+                
             </div>
         </div>
     </section> 

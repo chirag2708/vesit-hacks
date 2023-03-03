@@ -1,8 +1,44 @@
 <?php
+
+
+if(isset($_GET["cid"]))
+{
+    $route_id=$_GET['cid'];
+}
+
+
+$img = array();
+$route_ = array();
+$stops = array();
+$map = array();
+
+include_once('dbset.php');
+
+$sql = "SELECT * FROM services WHERE srno=$route_id";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+   
+    array_push($img,$row["img"]);
+    array_push($route_,$row["route_"]);
+    array_push($stops,$row["stops"]);
+    array_push($map,$row["map"]);
+
+  }
+} else {
+  echo "0 results";
+}
+$conn->close();
+
+?>
+
+<?php
 include_once "header.php";
 ?>
 
-    <div class="page-banner-wrap text-center bg-cover" style="background-image: url('assets/img/page-banner.jpg')">
+    <div class="page-banner-wrap text-center bg-cover" style="background-image: url('assets/img/services/services.jpeg')">
         <div class="container">
             <div class="page-heading text-white">
                 <h1>Service Details</h1>
@@ -13,8 +49,8 @@ include_once "header.php";
         <div class="container">
             <nav>
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                  <li class="breadcrumb-item"><a href="services.html">services</a></li>
+                  <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                  <li class="breadcrumb-item"><a href="services.php">services</a></li>
                   <li class="breadcrumb-item active" aria-current="page">service details</li>
                 </ol>
             </nav>
@@ -27,13 +63,11 @@ include_once "header.php";
                 <div class="col-xl-9 col-12 pe-xl-5">
                     <div class="service-details-contents">
                         <div class="service-feature-img">
-                            <img src="assets/img/services/b1.jpg" alt="">
+                        <iframe <?php echo " $map[0]"; ?> </iframe>
                         </div>
                         <div class="contents">
-                            <h2>Road Transport</h2>
-                            <p>With 50 branches situated in the U.S., Canada and Mexico, Transland's property transport items and administrations furnish a ground cargo sending network with inventive, assisted start to finish inventory network arrangements associating the U.S., <a href="#">North America</a> and the world. As a non-resource based organization, we give your business the broad and high thickness network it needs. Our ISO endorsed transporters and specialist organizations guarantee fast and dependable conveyance to all significant objections across the landmass. Get the contact you need to remain in front of the opposition with our scope of value land transport arrangements.</p>
-
-                            <p>Whether you need door-to-door forwarding services by road, rail, or both, our land shipping solutions will get your shipments from everywhere to anywhere in North America.</p>
+                            <h2><?php echo "$route_[0]"; ?></h2>
+                           
 
                             <div class="row mt-5">
                                 <div class="col-lg-4 col-md-6 col-12">
@@ -97,7 +131,8 @@ include_once "header.php";
 
                             <div class="service-contact-form">
                                 <div class="contact-form">
-                                    <h2>Contact us</h2>
+                                    <h2 style="font-size:25px;">Want to send your Fruits & Vegetables on this route?</h2>
+                                    <h2 style="color:red;">Book Now</h2>
 
                                     <form action="mail.php" class="row" id="contact-form">
                                         <div class="col-md-6 col-12">
@@ -117,16 +152,26 @@ include_once "header.php";
                                         </div>                                      
                                         <div class="col-md-6 col-12">
                                             <div class="single-personal-info">
-                                                <input type="text" id="subject" placeholder="Enter Subject">                                         
+                                                <input type="int" id="subject" placeholder="Enter Total Package Weight(in kg)">                                         
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-6 col-12">
+                                            <div class="single-personal-info">
+                                                <input type="text" id="phone" placeholder="Enter Boarding Stop">                                         
+                                            </div>
+                                        </div>                                      
+                                        <div class="col-md-6 col-12">
+                                            <div class="single-personal-info">
+                                                <input type="text" id="subject" placeholder="Enter Depature Stop">                                         
                                             </div>
                                         </div>                                      
                                         <div class="col-md-12 col-12">
                                             <div class="single-personal-info">
-                                                <textarea id="message" placeholder="Enter message"></textarea>                                        
+                                                <input type="date" id="message" placeholder="Select Date"></input>                                        
                                             </div>
                                         </div>                                      
                                         <div class="col-md-12 col-12">
-                                            <input class="submit-btn" type="submit" value="Get A Quote">
+                                            <input class="submit-btn" type="submit" value="Book Now">
                                         </div>                                      
                                     </form>
                                 </div>
@@ -138,27 +183,24 @@ include_once "header.php";
                     <div class="service-sidebar-wrapper">
                         <div class="single-sidebar-widgets">
                             <div class="wid-title">
-                                <h3>Logistics Services</h3>
+                                <h3 style="font-size:20px;color:red;">Intermediate Cities</h3>
                             </div>
                             <div class="services-category-link">
-                                <a href="services-details.html">road Transport</a>
-                                <a href="services-details.html">Ocean Transport</a>
-                                <a href="services-details.html">air Transport</a>
-                                <a href="services-details.html">rail Transport</a>
-                                <a href="services-details.html">drone Transport</a>
+                                <?php
+                               $string = $stops[0];
+                               $arrayString=  explode("-", $string );
+                               
+                                for($i = 0;$i<count($arrayString);$i++)
+                                { 
+                                ?> 
+                                <a href="#"><?php echo $arrayString[$i];?></a>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
 
-                        <div class="single-sidebar-widgets doc-sidebar">
-                            <div class="wid-title">
-                                <h3>Documents</h3>
-                            </div>
-                            <div class="download-service-doc">
-                                <a href="#" class="theme-btn off-white"><i class="fal fa-cloud-download"></i> Pricing Plan 2022</a>
-                                <a href="#" class="theme-btn"><i class="fal fa-file-pdf"></i> Delivery Plans</a>
-                                <a href="#" class="theme-btn"><i class="fal fa-file-pdf"></i> Transland Transport</a>
-                            </div>
-                        </div>
+                        
 
                         <div class="help-line-card text-white">
                             <div class="wid-title">

@@ -55,7 +55,7 @@ if(isset($_POST['name'])){
   
 
 ?>
-    <div class="page-banner-wrap text-center bg-cover" style="background-image: url('assets/img/contact-banner.jpg')">
+    <div class="page-banner-wrap text-center bg-cover" style="background-image: url('assets/img/contact.jpeg')">
         <div class="container">
             <div class="page-heading text-white">
                 <h1>contact us</h1>

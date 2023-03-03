@@ -48,9 +48,7 @@ if(isset($_POST['name'])){
     $con->close();
   
   }
-  else{
-    echo "not inside";
-  }
+
   
 ?>
 

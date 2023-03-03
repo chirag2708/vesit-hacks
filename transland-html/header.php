@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="modinatheme">
     <!-- ======== Page title ============ -->
-    <title>Farmzen - Transport & Logistics HTML Template</title>
+    <title>Farmzen</title>
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="assets/img/logo.jpeg">
     <!-- ===========  All Stylesheet ================= -->
