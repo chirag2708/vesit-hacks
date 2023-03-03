@@ -1,237 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include_once "header.php";
+?>
 
-<head>
-    <!-- ========== Meta Tags ========== -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="modinatheme">
-    <!-- ======== Page title ============ -->
-    <title>Transland - Transport & Logistics</title>
-    <!-- ========== Favicon Icon ========== -->
-    <link rel="shortcut icon" href="assets/img/favicon.png">
-    <!-- ===========  All Stylesheet ================= -->
-    <!--  Icon css plugins -->
-    <link rel="stylesheet" href="assets/css/icons.css">
-    <!--  animate css plugins -->
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <!--  slick css plugins -->
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <!--  magnific-popup css plugins -->
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <!-- metis menu css file -->
-    <link rel="stylesheet" href="assets/css/metismenu.css">
-    <!--  Bootstrap css plugins -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!--  main style css file -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- template main style css file -->
-    <link rel="stylesheet" href="style.css">
-    
-</head>
-
-<body class="body-wrapper">    
-    <!-- preloader -->
-    <div id="preloader" class="preloader">
-        <div class="animation-preloader">
-            <div class="spinner">                
-            </div>
-                <div class="txt-loading">
-                    <span data-text-preloader="T" class="letters-loading">
-                        T
-                    </span>
-                    <span data-text-preloader="R" class="letters-loading">
-                        R
-                    </span>
-                    <span data-text-preloader="A" class="letters-loading">
-                       A
-                    </span>
-                    <span data-text-preloader="N" class="letters-loading">
-                        N
-                    </span>
-                    <span data-text-preloader="S" class="letters-loading">
-                        S
-                    </span>
-                    <span data-text-preloader="L" class="letters-loading">
-                        L
-                    </span>
-                    <span data-text-preloader="A" class="letters-loading">
-                        A
-                    </span>
-                    <span data-text-preloader="N" class="letters-loading">
-                        N
-                    </span>
-                    <span data-text-preloader="D" class="letters-loading">
-                        D
-                    </span>
-                </div>
-            <p class="text-center">Loading</p>
-        </div>
-        <div class="loader">
-            <div class="row">
-                <div class="col-3 loader-section section-left">
-                    <div class="bg"></div>
-                </div>
-                <div class="col-3 loader-section section-left">
-                    <div class="bg"></div>
-                </div>
-                <div class="col-3 loader-section section-right">
-                    <div class="bg"></div>
-                </div>
-                <div class="col-3 loader-section section-right">
-                    <div class="bg"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="top-bar-wrapper d-none d-sm-block">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="top-left">
-                <a href="tel:987-098-098-09"><i class="fal fa-phone-volume"></i>987-098-098-09</a>
-                <a href="mailto:info@example.com"><i class="fal fa-envelope"></i>info@example.com</a>
-                <a href="#"><i class="fal fa-map-marker-alt"></i>Cargo Hub, LD 32614, UK</a>
-            </div>
-            <div class="top-right d-none d-md-block">
-                <div class="social-pages">
-                    <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fab fa-youtube" aria-hidden="true"></i></a> 
-                    <a href="#"><i class="fab fa-skype" aria-hidden="true"></i></a> 
-                </div>
-            </div>
-        </div>
-    </div>
-    <header class="header-1">
+    <div class="page-banner-wrap text-center bg-cover" style="background-image: url('assets/img/page-banner.jpg')">
         <div class="container">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-3 col-sm-5 col-md-4 col-6 pr-lg-5">
-                    <div class="logo">
-                        <a href="index.html">
-                        <img src="assets/img/logo.jpeg"  alt="Transland">       
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-9 text-end p-lg-0 d-none d-lg-flex justify-content-between align-items-center">
-                    <div class="menu-wrap">
-                        <div class="main-menu">
-                            <ul>
-                                <li><a href="index.html">Home </i></a>
-                                    <!-- <ul class="sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                    </ul> -->
-                                </li>
-                                <li><a href="about.html">About</a> </li>
-                                <li><a href="services.html">Services</a></li>
-                                    <!-- <ul class="sub-menu">
-                                        <li><a href="faq.html">faq</a></li>
-                                        <li><a href="team.html">team</a></li>
-                                        <li><a href="pricing.html">pricing</a></li>
-                                    </ul> -->
-                                </li>
-            
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="header-right-element">
-                        <a href="contact.html" class="theme-btn">get a quote <i class="fal fa-long-arrow-right"></i></a>
-                        <a href="#" class="search-btn"><i class="fal fa-search"></i></a>
-                        <div class="search-box">
-                            <form action="#">
-                                <input type="text" placeholder="Search">
-                                <button type="submit"><i class="fal fa-search"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-block d-lg-none col-sm-1 col-md-8 col-6">
-                    <div class="mobile-nav-wrap">
-                        <div id="hamburger"><i class="fal fa-bars"></i></div>
-                        <!-- mobile menu - responsive menu  -->
-                        <div class="mobile-nav">
-                            <button type="button" class="close-nav">
-                                <i class="fal fa-times-circle"></i>
-                            </button>
-                            <nav class="sidebar-nav">
-                                <ul class="metismenu" id="mobile-menu">
-                                    <li><a class="has-arrow" href="#">Homes</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="index.html">Homepage 1</a></li>
-                                            <li><a href="index-2.html">Homepage 2</a></li>
-                                            <li><a href="index-3.html">Homepage 3</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="about.html">about</a></li>
-                                    <li><a href="services.html">services</a></li>
-                                    <li>
-                                        <a class="has-arrow" href="#">Pages</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="faq.html">faq</a></li>
-                                            <li><a href="services-details.html">services details</a></li>
-                                            <li><a href="team.html">Team</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="news.html">News</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </nav>
-
-                            <div class="action-bar text-white">
-                                <div class="single-info-element">
-                                    <div class="icon">
-                                        <i class="fal fa-map-marked-alt"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h5>visit our location:</h5>
-                                        <span>West Jakarta City, UK</span>
-                                    </div>
-                                </div>
-                                <div class="single-info-element">
-                                    <div class="icon">
-                                        <i class="fal fa-clock"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h5>Opening Hours:</h5>
-                                        <span>Mon-Fri 8am-5pm</span>
-                                    </div>
-                                </div>
-                                <div class="single-info-element">
-                                    <div class="icon">
-                                        <i class="fal fa-envelope"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h5>Send us mail</h5>
-                                        <span>info@example.com</span>
-                                    </div>
-                                </div>
-                                <div class="call-us">
-                                    <div class="icon text-white">
-                                        <i class="fal fa-phone-volume"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h5>Troll fre number</h5>
-                                        <span>+09 949 858327</span>
-                                    </div>
-                                </div>
-                                <a href="contact.html" class="theme-btn mt-4">Track Your Shipment</a>
-                            </div>
-                        </div> 
-                    </div>
-                    <div class="overlay"></div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- <div class="page-banner-wrap text-center bg-cover" style="background-image: url('assets/img/page-banner.jpg')"> -->
-        <div class="container">
-            <!-- <div class="page-heading text-white">
+            <div class="page-heading text-white">
                 <h1>Service Details</h1>
-            </div> -->
+            </div>
         </div>
     </div>
     <div class="breadcrumb-wrapper">
@@ -252,7 +27,7 @@
                 <div class="col-xl-9 col-12 pe-xl-5">
                     <div class="service-details-contents">
                         <div class="service-feature-img">
-                            <img src="assets/img/services/mmango.jpeg" alt="">
+                            <img src="assets/img/services/b1.jpg" alt="">
                         </div>
                         <div class="contents">
                             <h2>Road Transport</h2>
@@ -363,21 +138,18 @@
                     <div class="service-sidebar-wrapper">
                         <div class="single-sidebar-widgets">
                             <div class="wid-title">
-                                <h3>Ratnagiri to Mumbai</h3>
+                                <h3>Logistics Services</h3>
                             </div>
                             <div class="services-category-link">
-                                <a href="services-details.html">Khandala</a>
-                                <a href="services-details.html">Lonavala</a>
-                                <a href="services-details.html">Pimpri Chinchwad</a>
-                                <a href="services-details.html">Satara</a>
-                                <a href="services-details.html">Ganpatipule</a>
-                                <a href="services-details.html">Jaigad Fort</a>
-                                <a href="services-details.html">Thibaw Palace</a>
-                                <a href="services-details.html">Ratnadurg Fort</a>
+                                <a href="services-details.html">road Transport</a>
+                                <a href="services-details.html">Ocean Transport</a>
+                                <a href="services-details.html">air Transport</a>
+                                <a href="services-details.html">rail Transport</a>
+                                <a href="services-details.html">drone Transport</a>
                             </div>
                         </div>
 
-                        <!-- <div class="single-sidebar-widgets doc-sidebar">
+                        <div class="single-sidebar-widgets doc-sidebar">
                             <div class="wid-title">
                                 <h3>Documents</h3>
                             </div>
@@ -386,20 +158,20 @@
                                 <a href="#" class="theme-btn"><i class="fal fa-file-pdf"></i> Delivery Plans</a>
                                 <a href="#" class="theme-btn"><i class="fal fa-file-pdf"></i> Transland Transport</a>
                             </div>
-                        </div> -->
+                        </div>
 
-                        <!-- <div class="help-line-card text-white">
+                        <div class="help-line-card text-white">
                             <div class="wid-title">
                                 <h3>How we can help you?</h3>
                                 <p>Ronquil coho salmon red snapper duckbill lungfish southern angelfish</p>
-                            </div> -->
-                            <!-- <div class="single-menu-box">
+                            </div>
+                            <div class="single-menu-box">
                                 <div class="icon">
                                     <i class="fal fa-phone-volume"></i>
                                 </div>
                                 <div class="content">
                                     <p>Contact</p>
-                                    <span>+012 (345) 67 89</span> -->
+                                    <span>+012 (345) 67 89</span>
                                 </div>
                             </div>
                         </div>
@@ -416,7 +188,7 @@
                     <div class="col-sm-6 col-xl-3">
                         <div class="about-transland pe-md-5 pe-xl-0">
                             <a href="index.html">
-                                <img src="assets/img/logo.jpeg" alt="transland">
+                                <img src="assets/img/footer-logo.png" alt="transland">
                             </a>
                             <p>Transland Logistics Services is a global supplier of transport and logistics solutions. We have offices in more than 20 countries and agents.</p>
                         </div>
