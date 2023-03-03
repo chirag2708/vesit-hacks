@@ -1,205 +1,46 @@
 <?php
+include_once "header.php";
 
-                                    if(isset($_POST['name'])){
-                                        $server="localhost";
-    $username="root";
-    $password="";
+if(isset($_POST['name'])){
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $weight = $_POST['weight'];
+    $date = $_POST['date'];
+    $boarding = $_POST['boarding'];
+    $depature = $_POST['depature'];
   
-    $con =mysqli_connect($server,$username,$password);
+    $sql= "INSERT INTO `farmzen`.`contact_us` (`name`, `email`, `phone`,`weight`,`date`,`boarding`,`depature`) VALUES ('$name', '$email', '$phone','$weight','$date','$boarding','$depature');";
+    
+    if($con->query($sql) == true){
+      
   
-    if(!$con)
-    {
-      die("connection failed " . mysqli_connect_error());
+      $to=$email;
+      $subject="Thanks for contacting Farmzen";
+      $message="We got your message";
+      $from="chirag.tester@gmail.com";
+      $headers="From: $from";
+  
+      if(mail($to,$subject,$message,$headers)){
+        echo "Mail Sent";
+      }
+      else{
+        echo "Email Failed";
+      }
+  
+  
+    }
+    else{
+      echo "ERROR: $sql <br> $con->error";
     }
 
-                                        $name = $_POST['name'];
-                                        $email = $_POST['email'];
-                                        $phone = $_POST['phone'];
-                                        $weight = $_POST['weight'];
-                                        $date = $_POST['date'];
-                                        $boarding = $_POST['boarding'];
-                                        $depature = $_POST['depature'];
-                                      
-                                        $sql= "INSERT INTO `farmzen`.`bookings` (`name`, `email`, `phone`,`weight`,`date`,`boarding`,`depature`) VALUES ('$name', '$email', '$phone','$weight','$date','$boarding','$depature');";
-                                        
-                                        if($con->query($sql) == true){
-                                          
-                                      
-                                          $to=$email;
-                                          $subject="Thanks for contacting Farmzen";
-                                          $message="We got your message";
-                                          $from="chirag.tester@gmail.com";
-                                          $headers="From: $from";
-                                      
-                                          if(mail($to,$subject,$message,$headers)){
-                                            echo "Mail Sent";
-                                          }
-                                          else{
-                                            echo "Email Failed";
-                                          }
-                                      
-                                      
-                                        }
-                                        else{
-                                          echo "ERROR: $sql <br> $con->error";
-                                        }
-                                    
-                                    $con->close();
-                                    }
-                                    ?>
-                                
-<?php
-
-
-if(isset($_GET["cid"]))
-{
-    $route_id=$_GET['cid'];
+$conn->close();
 }
-else
-{
-    header("location:services.php");
-}
-
-
-$img = array();
-$route_ = array();
-$stops = array();
-$map = array();
-
-include_once('dbset.php');
-
-$sql = "SELECT * FROM services WHERE srno=$route_id";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-   
-    array_push($img,$row["img"]);
-    array_push($route_,$row["route_"]);
-    array_push($stops,$row["stops"]);
-    array_push($map,$row["map"]);
-
-  }
-} else {
-  echo "0 results";
-}
-
 ?>
-
-<?php
-include_once "header.php";
-?>
-
-<div class="page-banner-wrap text-center bg-cover" style="background-image: url('assets/img/services/services.jpeg')">
-    <div class="container">
-        <div class="page-heading text-white">
-            <h1>Service Details</h1>
-        </div>
-    </div>
-</div>
-<div class="breadcrumb-wrapper">
-    <div class="container">
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="services.php">services</a></li>
-                <li class="breadcrumb-item active" aria-current="page">service details</li>
-            </ol>
-        </nav>
-    </div>
-</div>
-
-<section class="service-details-wrapper section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-9 col-12 pe-xl-5">
-                <div class="service-details-contents">
-                    <div class="service-feature-img">
-                        <iframe <?php echo " $map[0]" ; ?> </iframe>
-                    </div>
-                    <div class="contents">
-                        <h2>
-                            <?php echo "$route_[0]"; ?>
-                        </h2>
-
-
-                        <div class="row mt-5">
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="single-service-features">
-                                    <div class="icon">
-                                        <i class="flaticon-container"></i>
-                                    </div>
-                                    <h5>Part & Full Loads</h5>
-                                    <p>Disruptive forces such as new technology and system</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="single-service-features">
-                                    <div class="icon">
-                                        <i class="flaticon-logistics-delievry"></i>
-                                    </div>
-                                    <h5>Intermodel Solutions</h5>
-                                    <p>Disruptive forces such as new technology and system</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="single-service-features">
-                                    <div class="icon">
-                                        <i class="flaticon-drone-2"></i>
-                                    </div>
-                                    <h5>Latest Technology</h5>
-                                    <p>Disruptive forces such as new technology and system</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h3>Going Beyond the Usual</h3>
-                        <p>Crestfish stingray lenok leatherjacket Mexican golden trout cobia. Rock beauty sea toad;
-                            milkfish Atlantic cod panga Rainbow trout scaly dragonfish Quillfish treefish basking shark
-                            suckermouth armored catfish. Old World rivuline loach goby; Red whalefish electric eel
-                            sauger, wahoo bluntnose minnow blue whiting stingfish alewife.</p>
-
-                        <div class="row mt-4">
-                            <div class="col-12 col-md-4">
-                                <h5>Industries served</h5>
-                                <ul class="checked-list mt-1">
-                                    <li>Consumer goods</li>
-                                    <li>Food & Beverage</li>
-                                    <li>Electronics</li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <h5>Services offered</h5>
-                                <ul class="checked-list mt-1">
-                                    <li>Shared warehousing</li>
-                                    <li>Crossdocking / Transloading</li>
-                                    <li>FBA Preaparation</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <blockquote>
-                            “Nowrin I love you my jan, And the day came when the risk to remain tight in a bud was more
-                            painful than the risk it took to blossom.”
-                            - Asheq Salman
-                        </blockquote>
-
-                        <h4>Security from Start to Finish</h4>
-                        <p>Every supply chain is unique, and so are your business requirements. We understand it, which
-                            is why we are committed to being an integrator of end-to-end logistics services. This
-                            implies offering different solutions that can cater to your every individual supply chain
-                            need. Experience the comfort of end-to-end deliveries with just a single partner, and make
-                            your supply chain work to your competitive advantage.</p>
-
-                        <div class="service-contact-form">
+ <div class="service-contact-form">
                             <div class="contact-form">
-                                <h2 style="font-size:25px;">Want to send your Fruits & Vegetables on this route?</h2>
-                                <h2 style="color:red;">Book Now.!</h2>
-
-                               
-
-                                <form action="#" class="row" id="contact-form" method="POST">
+<form action="#" class="row" id="contact-form">
                                     <div class="col-md-6 col-12">
                                         <div class="single-personal-info">
                                             <input type="text" id="fname" name="name" placeholder="Enter Name">
@@ -238,7 +79,7 @@ include_once "header.php";
                                                     { 
                                                     ?>
 
-                                                <option value="<?php echo $arrayString[$i];?>" id="Boarding_Point" placeholder="Boarding Point">
+                                                <option value="type" id="Boarding_Point" placeholder="Boarding Point">
                                                     <?php echo $arrayString[$i];?>
                                                 </option>
                                                 <?php
@@ -261,7 +102,7 @@ include_once "header.php";
                                                     { 
                                                     ?>
 
-                                                <option value="<?php echo $arrayString[$i];?>" id="Depature_Point" placeholder="Boarding Point">
+                                                <option value="type" id="Depature_Point" placeholder="Boarding Point">
                                                     <?php echo $arrayString[$i];?>
                                                 </option>
                                                 <?php
@@ -277,58 +118,12 @@ include_once "header.php";
                                         <input class="submit-btn" type="submit" value="Book Now">
                                     </div>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-12 mt-5 mt-xl-0">
-                <div class="service-sidebar-wrapper">
-                    <div class="single-sidebar-widgets">
-                        <div class="wid-title">
-                            <h3 style="font-size:20px;color:red;">Intermediate Cities</h3>
-                        </div>
-                        <div class="services-category-link">
-                            <?php
-                               $string = $stops[0];
-                               $arrayString=  explode("-", $string );
-                               
-                                for($i = 0;$i<count($arrayString);$i++)
-                                { 
-                                ?>
-                            <a href="#">
-                                <?php echo $arrayString[$i];?>
-                            </a>
-                            <?php
-                                }
-                                ?>
-                        </div>
-                    </div>
+                                        </div>
+                                        </div>
 
 
 
-                    <div class="help-line-card text-white">
-                        <div class="wid-title">
-                            <h3>How we can help you?</h3>
-                            <p>Ronquil coho salmon red snapper duckbill lungfish southern angelfish</p>
-                        </div>
-                        <div class="single-menu-box">
-                            <div class="icon">
-                                <i class="fal fa-phone-volume"></i>
-                            </div>
-                            <div class="content">
-                                <p>Contact</p>
-                                <span>+012 (345) 67 89</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="footer-1 footer-wrap">
+                                <footer class="footer-1 footer-wrap">
     <div class="footer-widgets-wrapper theme-bg">
         <div class="container">
             <div class="row">
