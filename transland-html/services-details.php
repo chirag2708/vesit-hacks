@@ -1,53 +1,87 @@
 <?php
 
-                                    if(isset($_POST['name'])){
-                                        $server="localhost";
-    $username="root";
-    $password="";
-  
-    $con =mysqli_connect($server,$username,$password);
+if(isset($_POST['name'])){
+    $servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "farmzen";
+
+
+$con = new mysqli($servername, $username, $password, $dbname);
   
     if(!$con)
     {
       die("connection failed " . mysqli_connect_error());
     }
 
-                                        $name = $_POST['name'];
-                                        $email = $_POST['email'];
-                                        $phone = $_POST['phone'];
-                                        $weight = $_POST['weight'];
-                                        $date = $_POST['date'];
-                                        $boarding = $_POST['boarding'];
-                                        $depature = $_POST['depature'];
-                                      
-                                        $sql= "INSERT INTO `farmzen`.`bookings` (`name`, `email`, `phone`,`weight`,`date`,`boarding`,`depature`) VALUES ('$name', '$email', '$phone','$weight','$date','$boarding','$depature');";
-                                        
-                                        if($con->query($sql) == true){
-                                          
-                                      
-                                          $to=$email;
-                                          $subject="Thanks for contacting Farmzen";
-                                          $message="We got your message";
-                                          $from="chirag.tester@gmail.com";
-                                          $headers="From: $from";
-                                      
-                                          if(mail($to,$subject,$message,$headers)){
-                                            echo "Mail Sent";
-                                          }
-                                          else{
-                                            echo "Email Failed";
-                                          }
-                                      
-                                      
-                                        }
-                                        else{
-                                          echo "ERROR: $sql <br> $con->error";
-                                        }
-                                    
-                                    $con->close();
-                                    }
-                                    ?>
-                                
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $weight = $_POST['weight'];
+    $date = $_POST['date'];
+    $boarding = $_POST['boarding'];
+    $depature = $_POST['depature'];
+
+    if(isset($_GET["cid"]))
+{
+    $route_id=$_GET['cid'];
+    
+}
+$sql = "SELECT * FROM services WHERE srno=$route_id";
+$result = $con->query($sql);
+
+if ($result->num_rows > 0) {
+    $current_weight = array();
+    $max_weight = array();
+    while($row = $result->fetch_assoc()) {
+      array_push($current_weight,$row["current_weight"]);
+      array_push($max_weight,$row["max_weight"]);
+    }
+    
+}
+$current_weight=$current_weight[0];
+$max_weight=$max_weight[0];
+
+(int)$available_weight=(int)$max_weight-(int)$current_weight;
+(int)$new_weight=(int)$weight+(int)$current_weight;
+
+
+if (((int)$weight)<=((int)$available_weight))
+{
+    
+    $sql= "INSERT INTO `farmzen`.`bookings` (`name`, `email`, `phone`,`weight`,`date`,`boarding`,`depature`) VALUES ('$name', '$email', '$phone','$weight','$date','$boarding','$depature');";
+    $sql1= "UPDATE `farmzen`.`services` SET current_weight=$new_weight WHERE srno=$route_id;";
+    
+    if($con->query($sql) == true){
+        
+        $result1 = $con->query($sql1);
+        $to=$email;
+        $subject="Thanks for contacting Farmzen";
+        $message="We got your message";
+        $from="chirag.tester@gmail.com";
+        $headers="From: $from";
+    
+        if(mail($to,$subject,$message,$headers)){
+        echo "Mail Sent";
+        }
+        else{
+        echo "Email Failed";
+        }
+    
+    
+    }
+    else{
+        echo "ERROR: $sql <br> $con->error";
+    }
+}
+else{
+    echo "Sorry! we have space left only for ".$available_weight." kgs of weight ";
+}
+
+$con->close();
+}
+?>
+
 <?php
 
 
@@ -197,7 +231,7 @@ include_once "header.php";
                                 <h2 style="font-size:25px;">Want to send your Fruits & Vegetables on this route?</h2>
                                 <h2 style="color:red;">Book Now.!</h2>
 
-                               
+
 
                                 <form action="#" class="row" id="contact-form" method="POST">
                                     <div class="col-md-6 col-12">
@@ -207,7 +241,8 @@ include_once "header.php";
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="single-personal-info">
-                                            <input type="email" id="email" name="email" placeholder="Enter Email Address">
+                                            <input type="email" id="email" name="email"
+                                                placeholder="Enter Email Address">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -223,12 +258,14 @@ include_once "header.php";
                                     </div>
                                     <div class="col-md-12 col-12">
                                         <div class="single-personal-info">
-                                            <input type="date" name="date" id="message" placeholder="Select Date"></input>
+                                            <input type="date" name="date" id="message"
+                                                placeholder="Select Date"></input>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="single-personal-info">
-                                            <label for="Boarding_Point" style="font-size:20px;padding-right:40px;">Boarding Point</label>
+                                            <label for="Boarding_Point"
+                                                style="font-size:20px;padding-right:40px;">Boarding Point</label>
                                             <select type="text" name="boarding" id="Boarding_Point">
                                                 <?php
                                                 $string = $stops[0];
@@ -238,7 +275,8 @@ include_once "header.php";
                                                     { 
                                                     ?>
 
-                                                <option value="<?php echo $arrayString[$i];?>" id="Boarding_Point" placeholder="Boarding Point">
+                                                <option value="<?php echo $arrayString[$i];?>" id="Boarding_Point"
+                                                    placeholder="Boarding Point">
                                                     <?php echo $arrayString[$i];?>
                                                 </option>
                                                 <?php
@@ -251,7 +289,8 @@ include_once "header.php";
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="single-personal-info">
-                                            <label for="Depature_Point" style="font-size:20px;padding-right:40px;">Departure Point</label>
+                                            <label for="Depature_Point"
+                                                style="font-size:20px;padding-right:40px;">Departure Point</label>
                                             <select type="text" name="depature" id="Depature_Point">
                                                 <?php
                                                 $string = $stops[0];
@@ -261,7 +300,8 @@ include_once "header.php";
                                                     { 
                                                     ?>
 
-                                                <option value="<?php echo $arrayString[$i];?>" id="Depature_Point" placeholder="Boarding Point">
+                                                <option value="<?php echo $arrayString[$i];?>" id="Depature_Point"
+                                                    placeholder="Boarding Point">
                                                     <?php echo $arrayString[$i];?>
                                                 </option>
                                                 <?php
@@ -272,7 +312,7 @@ include_once "header.php";
                                             </select>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-12 col-12">
                                         <input class="submit-btn" type="submit" value="Book Now">
                                     </div>
